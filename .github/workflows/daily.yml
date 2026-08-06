@@ -1,0 +1,32 @@
+name: Facebook Leads Daily
+
+on:
+  schedule:
+    - cron: '0 17 * * *'  # 00:00 Bangkok time (UTC+7)
+  workflow_dispatch:        # รัน manual ได้
+
+jobs:
+  fetch-leads:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch leads and send email
+        env:
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          FB_PAGE_ID:    ${{ secrets.FB_PAGE_ID }}
+          FB_APP_ID:     ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+          FB_FORM_IDS:   ${{ secrets.FB_FORM_IDS }}
+          GMAIL_USER:    ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS:    ${{ secrets.GMAIL_PASS }}
+          EMAIL_TO:      ${{ secrets.EMAIL_TO }}
+        run: python fetch_leads.py
