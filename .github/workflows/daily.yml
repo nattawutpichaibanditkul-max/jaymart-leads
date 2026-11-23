@@ -2,7 +2,7 @@ name: Facebook Leads Daily
 
 on:
   schedule:
-    - cron: '37 16 * * *'   # 23:37 Bangkok time (UTC+7)
+    - cron: '0 15 * * *'   # 22:00 Bangkok time (UTC+7)
   workflow_dispatch:       # รัน manual ได้
 
 jobs:
