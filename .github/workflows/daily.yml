@@ -1,8 +1,8 @@
 name: Facebook Leads Daily
 
 on:
-  schedule:
-    - cron: '0 15 * * *'   # 22:00 Bangkok time (UTC+7)
+  # ตารางเวลาย้ายไปที่ Cloudflare Worker 'jaymart-leads-scheduler'
+  # ซึ่งยิง workflow_dispatch ให้ทุกวัน 00:15 น. เวลาไทย
   workflow_dispatch:       # รัน manual ได้
 
 jobs:
